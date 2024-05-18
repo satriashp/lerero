@@ -2,28 +2,28 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: grafana.localhost
+  name: grafana.lvh,me
   namespace: monitoring
 spec:
-  secretName: grafana.localhost
+  secretName: grafana.lvh,me
   duration: 48h
   renewBefore: 25h
   issuerRef:
     name: root-trust-anchor
     kind: ClusterIssuer
-  commonName: "grafana.localhost"
+  commonName: "grafana.lvh,me"
   dnsNames:
-  - "grafana.localhost"
+  - "grafana.lvh,me"
 ---
 apiVersion: getambassador.io/v3alpha1
 kind: Host
 metadata:
-  name: grafana.localhost
+  name: grafana.lvh,me
   namespace: monitoring
 spec:
-  hostname: "grafana.localhost"
+  hostname: "grafana.lvh,me"
   tlsSecret:
-    name: grafana.localhost
+    name: grafana.lvh,me
   requestPolicy:
     insecure:
       action: Redirect
@@ -58,10 +58,10 @@ spec:
 apiVersion: getambassador.io/v3alpha1
 kind:  Mapping
 metadata:
-  name: grafana.localhost
+  name: grafana.lvh,me
   namespace: monitoring
 spec:
   prefix: /
   rewrite: ""
   service: prometheus-grafana:80
-  hostname: "grafana.localhost"
+  hostname: "grafana.lvh,me"
