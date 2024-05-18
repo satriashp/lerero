@@ -1,0 +1,27 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: emissary-ingress
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: linkerd
+  interval: 10m
+  chart:
+    spec:
+      chart: emissary-ingress
+      version: '8.7.2'
+      sourceRef:
+        kind: HelmRepository
+        name: datawire
+        namespace: flux-system
+      interval: 1m
+  targetNamespace: emissary
+  install:
+    createNamespace: true
+  values:
+    agent:
+      enabled: false
+    podAnnotations:
+      config.linkerd.io/skip-inbound-ports: 80,433
+      linkerd.io/inject: enabled
