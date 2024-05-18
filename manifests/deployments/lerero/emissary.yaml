@@ -2,28 +2,28 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: grafana.localhost
-  namespace: monitoring
+  name: localhost
+  namespace: production
 spec:
-  secretName: grafana.localhost
+  secretName: localhost
   duration: 48h
   renewBefore: 25h
   issuerRef:
     name: root-trust-anchor
     kind: ClusterIssuer
-  commonName: "grafana.localhost"
+  commonName: "localhost"
   dnsNames:
-  - "grafana.localhost"
+  - "localhost"
 ---
 apiVersion: getambassador.io/v3alpha1
 kind: Host
 metadata:
-  name: grafana.localhost
-  namespace: monitoring
+  name: localhost
+  namespace: production
 spec:
-  hostname: "grafana.localhost"
+  hostname: "localhost"
   tlsSecret:
-    name: grafana.localhost
+    name: localhost
   requestPolicy:
     insecure:
       action: Redirect
@@ -32,8 +32,8 @@ spec:
 apiVersion: getambassador.io/v3alpha1
 kind: Listener
 metadata:
-  name: grafana-http
-  namespace: monitoring
+  name: lerero-http
+  namespace: production
 spec:
   port: 8080
   protocol: HTTPS  # NOT A TYPO, see below
@@ -45,8 +45,8 @@ spec:
 apiVersion: getambassador.io/v3alpha1
 kind: Listener
 metadata:
-  name: grafana-https
-  namespace: monitoring
+  name: lerero-https
+  namespace: production
 spec:
   port: 8443
   protocol: HTTPS
@@ -58,10 +58,10 @@ spec:
 apiVersion: getambassador.io/v3alpha1
 kind:  Mapping
 metadata:
-  name: grafana.localhost
-  namespace: monitoring
+  name: localhost
+  namespace: production
 spec:
   prefix: /
   rewrite: ""
-  service: prometheus-grafana:80
-  hostname: "grafana.localhost"
+  service: lerero:3000
+  hostname: "localhost"
