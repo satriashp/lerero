@@ -17,8 +17,6 @@ spec:
         namespace: flux-system
       interval: 1h
   targetNamespace: monitoring
-  install:
-    createNamespace: true
   values:
     grafana:
       adminPassword: admin
