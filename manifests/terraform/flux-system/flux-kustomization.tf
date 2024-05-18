@@ -8,7 +8,7 @@ terraform {
 }
 
 provider "kubectl" {
-  config_context = "k3d-local"
+  config_context = "k3d-lerero"
   config_path    = "~/.kube/config"
 }
 

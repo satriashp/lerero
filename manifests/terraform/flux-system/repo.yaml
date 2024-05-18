@@ -8,4 +8,4 @@ spec:
   interval: 1h
   ref:
     branch: main
-  url: ssh://git@github.com/satriashp/lerero
+  url: https://github.com/satriashp/lerero.git
